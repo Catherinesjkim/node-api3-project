@@ -20,7 +20,7 @@ server.use(helmet()); // 3. add third party mw, needs to be npm installed
 server.use(express.json()); // built-in middleware: no need to npm install 
 // server.use(addName); // mw - global - no need
 
-// the router handles endpoints that begin with /api/hubs
+//? the router handles endpoints that begin with /api/hubs 
 server.use('/api/users', userRouter);
 
 // router handler

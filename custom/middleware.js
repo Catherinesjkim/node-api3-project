@@ -1,11 +1,14 @@
-// custom middleware - simplified version of morgan
+// MVP
+// 1. Write and implement four custom middleware functions
+// 2. Build an API to let clients perform CRUD operations on users
+// 3. Add endpoints to retrieve the list of posts for a user and to store a new post for a user
 const Users = require('../users/userDb');
 const Posts = require('../posts/postDb');
 
 /*
-- `logger()`
-  - `logger` logs to the console the following information about each request: request method, request url, and a timestamp
-  - this middleware runs on every request made to the API
+  1. `logger()`
+    - `logger` logs to the console the following information about each request: request method, request url, and a timestamp
+    - this middleware runs on every request made to the API
 */
 const logger = (req, res, next) => {
   // log info about the request to the console --> GET to /
@@ -17,7 +20,7 @@ const logger = (req, res, next) => {
 }
 
 /*
-- `validateUserId()`
+ 2. `validateUserId()`
   - `validateUserId` validates the user id on every request that expects a user id parameter
   - if the `id` parameter is valid, store that user object as `req.user`
   - if the `id` parameter does not match any user id in the database, cancel the request and respond with status `400` and `{ message: "invalid user id" }`
@@ -33,7 +36,7 @@ const validateUserId = (req, res, next) => {
 }
 
 /*
-- `validateUser()`
+ 3. `validateUser()`
   - `validateUser` validates the `body` on a request to create a new user
   - if the request `body` is missing, cancel the request and respond with status `400` and `{ message: "missing user data" }`
   - if the request `body` is missing the required `name` field, cancel the request and respond with status `400` and `{ message: "missing required name field" }`
@@ -48,7 +51,7 @@ const validateUser = (req, res, next) =>  {
 }
 
 /*
-- `validatePost()`
+4. `validatePost()`
   - `validatePost` validates the `body` on a request to create a new post
   - if the request `body` is missing, cancel the request and respond with status `400` and `{ message: "missing post data" }`
   - if the request `body` is missing the required `text` field, cancel the request and respond with status `400` and `{ message: "missing required text field" }`
