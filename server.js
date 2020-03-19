@@ -3,9 +3,8 @@
 // 3. Add endpoints to retrieve the list of posts for a user and to store a new post for a user
 const express = require('express'); // importing a CommonJS module
 const userRouter = require('./users/userRouter.js');
-const logger = require('./custom/middleware.js');
-const notFound = require('./custom/middleware.js')
-
+const mw = require('./custom/middleware.js');
+const logger = mw.logger;
 const server = express();
 
 server.use(express.json());
@@ -19,8 +18,9 @@ server.use(helmet()); // 3. add third party mw, needs to be npm installed
 // server.use(logger);
 server.use(express.json()); // built-in middleware: no need to npm install 
 // server.use(addName); // mw - global - no need
+server.use(logger);
 
-//? the router handles endpoints that begin with /api/hubs 
+//? the router handles endpoints that begin with /api/users 
 server.use('/api/users', userRouter);
 
 // router handler

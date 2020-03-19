@@ -2,6 +2,8 @@
 // 1. Write and implement four custom middleware functions
 // 2. Build an API to let clients perform CRUD operations on users
 // 3. Add endpoints to retrieve the list of posts for a user and to store a new post for a user
+
+// For validations (400 errors) in the mw
 const Users = require('../users/userDb');
 const Posts = require('../posts/postDb');
 
@@ -14,8 +16,9 @@ const logger = (req, res, next) => {
   // log info about the request to the console --> GET to /
   const method = req.method;
   const endpoint = req.originalUrl;
-  const date = new Date()
+  const date = new Date();
   console.log(`You made a ${method} request to ${endpoint} on ${date}`);
+
   next(); // moves the request to the next mw
 }
 
@@ -43,6 +46,7 @@ const validateUserId = (req, res, next) => {
 */
 const validateUser = (req, res, next) =>  {
   const { name } = req.body;
+
   Object.entries(req.body).length === 0
     ? res.status(400).json({ message: 'No User Data' })
     : !name
@@ -58,6 +62,7 @@ const validateUser = (req, res, next) =>  {
 */
 const validatePost = (req, res, next) => {
   const { text } = req.body;
+
   Object.entries(req.body).length === 0
     ? res.status(400).json({ message: 'No User Data' })
     : !text

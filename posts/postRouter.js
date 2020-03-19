@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
       res.status(200).json(post)
     })
     .catch(err => {
-      res.status(500).json({ error: 'I cannot provide any info from the inner server, try agan!', err })
+      res.status(500).json({ error: 'I cannot provide any info from the inner server, try agan!', err }) 
     })
 });
 
@@ -43,7 +43,7 @@ router.delete('/:id', validatePostId, (req, res) => {
       post
         ? Posts.remove(id).then(deleted => {
           deleted ? res.status(200).json({ success: `Post ${id} was deleted!`, info: post }) : null
-        })
+        }) 
         : null
     })
       .catch(err => {
@@ -51,9 +51,7 @@ router.delete('/:id', validatePostId, (req, res) => {
       })
 });
 
-/*
-
-*/
+// 
 router.put('/:id', validatePostId, (req, res) => {
   const { id } = req.params;
 
@@ -67,3 +65,20 @@ router.put('/:id', validatePostId, (req, res) => {
 });
 
 module.exports = router;
+
+/*
+ {
+      user_id: 1,
+      text:
+        'I wish the ring had never come to me. I wish none of this had happened.',
+    },
+    {
+      user_id: 1,
+      text: 'I think we should get off the road. Get off the road! Quick!',
+    },
+    { user_id: 1, text: 'Our business is our own.' },
+    { user_id: 1, text: 'Can you protect me from yourself?' },
+    { user_id: 2, text: "I ain't been droppin' no eaves, sir! Promise!" }, // 5
+    { user_id: 2, text: "Of course you are, and I'm coming with you!" }, // 6
+*/
+
