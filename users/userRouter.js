@@ -126,6 +126,7 @@ router.post("/:id/posts", validateUserId, validatePost, (req, res) => {
     })
 });
 
+// returns all of the comments made by the the same id
 router.get('/:id/posts', validateUserId, (req, res) => {
   const { id } = req.params;
 
