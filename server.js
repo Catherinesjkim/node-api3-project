@@ -3,14 +3,13 @@
 // 3. Add endpoints to retrieve the list of posts for a user and to store a new post for a user
 const express = require('express'); // importing a CommonJS module
 const userRouter = require('./users/userRouter.js');
+const postRouter = require('./posts/postRouter');
 const mw = require('./custom/middleware.js');
 const logger = mw.logger;
 const server = express();
 
-server.use(express.json());
-
 const morgan = require('morgan'); 
-const helmet = require('helmet'); // 1. npm i hlmet; 2. require
+const helmet = require('helmet'); // 1. npm i helmet; 2. require
 
 // global middleware - turn it on by typing server.use - will be applied to every request coming into the server - it teaches express how to parse json from req.body - MW is a function that lookd like a route handler.
 // server.use(morgan('dev')); // third party mw, needs to be npm installed - we are going to build a simplified version of morgan
@@ -22,6 +21,7 @@ server.use(logger);
 
 //? the router handles endpoints that begin with /api/users 
 server.use('/api/users', userRouter);
+server.use('/api/posts', postRouter);
 
 // router handler
 server.get("/", addName, (req, res) => {

@@ -16,7 +16,7 @@ const validatePost = mw.validatePost;
 router.get('/', (req, res) => {
   Posts.get()
     .then(post => {
-      res.status(200).json(post)
+      res.status(200).json(post) // worked on postman
     })
     .catch(err => {
       res.status(500).json({ error: 'I cannot provide any info from the inner server, try agan!', err }) 
@@ -28,7 +28,7 @@ router.get('/:id', validatePostId, (req, res) => {
   const { id } = req.params;
   Posts.getById(id)
     .then(post => {
-      res.status(200).json(post)
+      res.status(200).json(post) // worked on postman
     })
     .catch(err => {
       res.status(500).json({ error: "I cannot provide any info from the inner server, try again!", err })
@@ -41,8 +41,8 @@ router.delete('/:id', validatePostId, (req, res) => {
   Posts.getById(id)
     .then(post => {
       post
-        ? Posts.remove(id).then(deleted => {
-          deleted ? res.status(200).json({ success: `Post ${id} was deleted!`, info: post }) : null
+        ? Posts.remove(id).then(deleted => { 
+          deleted ? res.status(200).json({ success: `Post ${id} was deleted!`, info: post }) : null // worked on postman
         }) 
         : null
     })
@@ -52,13 +52,13 @@ router.delete('/:id', validatePostId, (req, res) => {
 });
 
 // 
-router.put('/:id', validatePostId, (req, res) => {
+router.put('/:id', validatePost, validatePostId, (req, res) => {
   const { id } = req.params;
 
   Posts.update(id, req.body)
     .then(post => {
       res.status(200).json({ success: 'Info Updated!', info: req.body })
-    })
+    }) // worked on postman
     .catch(err => {
       res.status(500).json({ error: 'I cannot provide any info from the inner server, try again!', err })
     })

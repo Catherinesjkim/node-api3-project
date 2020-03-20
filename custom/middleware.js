@@ -70,9 +70,20 @@ const validatePost = (req, res, next) => {
     : next()
 }
 
+const validatePostId = (req, res, next) => {
+  const { id } = req.params;
+
+  Posts.getById(id)
+    .then(user => {
+      user ? req.user : res.status(400).json({ message: 'Invalid User ID!' })
+      next()
+    })
+}
+
 module.exports = {
   logger, 
   validateUserId,
   validateUser,
-  validatePost
+  validatePost,
+  validatePostId
 }
