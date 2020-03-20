@@ -66,7 +66,7 @@ const validatePost = (req, res, next) => {
   Object.entries(req.body).length === 0
     ? res.status(400).json({ message: 'No User Data' })
     : !text
-    ? res.status(400).json({ message: 'Missing required name field' })
+    ? res.status(400).json({ message: 'Missing required text field' })
     : next()
 }
 

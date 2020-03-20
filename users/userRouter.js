@@ -83,6 +83,7 @@ router.delete('/:id', validateUserId, (req, res) => {
     });
 
 // update(): accepts two arguments, the first is the id of the resource to update and the second is an object with the changes to apply. It returns the count of updated records. If the count is 1 it means the record was updated correctly
+// Can't add the same name twice
 router.put('/:id', validateUserId, (req, res) => {
   const { id } = req.params
 
